@@ -194,10 +194,7 @@ replacer.replace = function( itemstack, user, pointed_thing, mode )
 
 		      minetest.chat_send_player( name, "You have no further '"..( daten[1] or "?" ).."'. Replacement failed.");
 		      return nil;
-		    else
-		      
-			  if players_income[name] == nil then players_income[name] = 0 end
-			  players_income[name] = players_income[name] + 10
+		    
 
 		    end
 
@@ -214,6 +211,8 @@ replacer.replace = function( itemstack, user, pointed_thing, mode )
 		      and node.name ~= "default:water_flowing" ) then
 
 		      minetest.node_dig( pos, node, user );
+		      
+
 
 		      local digged_node = minetest.get_node_or_nil( pos );
 		      if( not( digged_node ) 
@@ -223,10 +222,12 @@ replacer.replace = function( itemstack, user, pointed_thing, mode )
 			  return nil;
 		      end
 		      
+		      
 		    end
 
 		    -- consume the item
 		    user:get_inventory():remove_item("main", daten[1].." 1");
+		    
 
 		    --user:get_inventory():add_item( "main", node.name.." 1");
 		end
@@ -235,6 +236,10 @@ replacer.replace = function( itemstack, user, pointed_thing, mode )
 
 		--minetest.place_node( pos, { name =  item[ "metadata" ] } );
 		minetest.add_node( pos, { name =  daten[1], param1 = daten[2], param2 = daten[3] } );
+		
+			  if players_income[name] == nil then players_income[name] = 0 end
+			  players_income[name] = players_income[name] + 10
+			  --minetest.chat_send_player(name," income is : "..players_income[name])
 		    else
 	  minetest.chat_send_player(name, "You do not have the replace priv")
       end
