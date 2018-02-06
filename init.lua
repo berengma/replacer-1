@@ -194,6 +194,11 @@ replacer.replace = function( itemstack, user, pointed_thing, mode )
 
 		      minetest.chat_send_player( name, "You have no further '"..( daten[1] or "?" ).."'. Replacement failed.");
 		      return nil;
+		    else
+		      
+			  if players_income[name] == nil then players_income[name] = 0 end
+			  players_income[name] = players_income[name] + 10
+
 		    end
 
 
